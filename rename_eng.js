@@ -1,0 +1,2 @@
+//for /r %i in (*.md) do @node rename_eng.js %~pi %~ni %~xi %~di >> rename_eng.bat
+console.log('rename ' + process.argv[5] + process.argv[2] + decodeURI(process.argv[3]) + process.argv[4] + ' ' + process.argv[5] + process.argv[2] + decodeURI(process.argv[3]) + process.argv[4]);

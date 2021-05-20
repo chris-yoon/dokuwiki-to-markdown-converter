@@ -1,0 +1,2 @@
+// for /r %i in (*.md) do @node uri_decode.js %~pi %~ni %~xi %~di >> rename_decoded_ko.bat
+console.log('rename ' + process.argv[5] + process.argv[2] + process.argv[3] + process.argv[4] + ' ' + decodeURI(process.argv[3]) + process.argv[4]);
