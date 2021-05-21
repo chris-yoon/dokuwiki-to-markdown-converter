@@ -29,21 +29,35 @@ function checkNumber(data) {
 //![표준관리전체프로세스](/egovframework/adt/표준관리_전체프로세스.jpg)
 
 function parseMd(text) {
-  const link_with_ext = /\[(.*?)\]\((.*?\.(.*?))\)/gim;
-  const url_end_with_image_ext = /\[(.*?)\]\((.*?\.(jpg|png|gif))\)/gim;
-  const url_end_with_not_image_ext = /\[(.*?)\]\((.*?[^\.(jpg|png|gif)])\)/gim;
+  const REGEX_URL_END_WITH_IMG_EXT1 =
+    /\[(.*?)\]\((\/egovframework.*?\.(jpg|png|gif))\)/gim;
+
+  // (Important) Non-capturing group in regular expressions : ?:
+  const REGEX_URL_END_WITH_IMG_EXT2 =
+    /\[(.*?)\]\((?:\/images)(.*?\.(jpg|png|gif))\)/gim;
+
+  const REGEX_URL_END_WITH_NOT_IMG_EXT =
+    /\[(.*?)\]\((.*?[^\.(jpg|png|gif)])\)/gim;
 
   //1st Group : String in bracket []
   //2nd Group : String in parenthesis ()
-  var txtMutable = text.replace(link_with_ext, "$2");
   //3rd Group : Extenstion in parenthesis ()
 
-  if (url_end_with_image_ext.test(text)) {
-    return text.replace(link_with_ext, "[$1](../../media$2)");
-  } else if (url_end_with_not_image_ext.test(text)) {
-    return text.replace(link_with_ext, "[$1](..$2)");
+  if (REGEX_URL_END_WITH_IMG_EXT1.test(text)) {
+    return text.replace(REGEX_URL_END_WITH_IMG_EXT1, "[$1](../../media$2)");
+  } else if (REGEX_URL_END_WITH_IMG_EXT2.test(text)) {
+    return text.replace(
+      REGEX_URL_END_WITH_IMG_EXT2,
+      "[$1](../../media/egovframework$2)"
+    );
+  } else if (REGEX_URL_END_WITH_NOT_IMG_EXT.test(text)) {
+    return text.replace(REGEX_URL_END_WITH_NOT_IMG_EXT, "[$1](..$2)");
   }
 }
+
+console.log(
+  parseMd("[표준관리전체프로세스](/images/adt/표준관리_전체프로세스.jpg)")
+);
 
 console.log(
   parseMd(

@@ -6,7 +6,7 @@ And also I will use the following basic sentence structure to automate time-cons
 
 > for {each item} in {a collection of items} do {command}
 
-## Installation (pandoc)
+## Installation (pandoc, glob, replace)
 
 Pandoc is a free and open-source document converter. It was created by John MacFarlane, a philosophy professor at the University of California, Berkeley. (10 August 2006)
 
@@ -15,6 +15,20 @@ Pandoc is a free and open-source document converter. It was created by John MacF
 
 ```
 pandoc --version
+```
+
+- "Globs" are the patterns you type when you do stuff like ls _.js on the command line, or put build/_ in a .gitignore file.
+- https://www.npmjs.com/package/glob
+
+```
+npm i glob
+```
+
+- replace is a command line utility for performing search-and-replace on files
+- https://www.npmjs.com/package/replace
+
+```
+npm i replace
 ```
 
 ## Usage
@@ -78,15 +92,18 @@ rename_decoded_ko_img.bat
 for /r %i in (*.pdf, *.zip, *.doc, *.ppt, *.tar) do del %~fi
 ```
 
-### 6. regexp replace 적용
+### 6. Find and replace text using regular expressions
 
 It is necessary to change the image path within the md file. For example, the following image paths applied to dokuwiki can be different in markdown:
 
 ```
--- as-is
 ![공통분류코드목록 화면](/egovframework/com/sym/ccc/cmmnclcodelist.jpg)
--- to-be
+-->
 ![공통분류코드목록 화면](../../media/egovframework/com/sym/ccc/cmmnclcodelist.jpg)
+
+![](/images/com/cop/smt/lsm/월별일정.png)
+-->
+![](../../media/egovframework/com/cop/smt/lsm/월별일정.png)
 ```
 
 ```
@@ -110,6 +127,11 @@ The following absolute path link isn't at all recognized as a link.
 /\(.*[^\.(jpg|png|gif)]\)/gim
 ```
 
+```
+node replace_file_contents_using_regex.js 게시물통계.md
+for /r %i in (*.md) do @node replace_file_contents_using_regex.js %~fi
+```
+
 ## Reference
 
 ```
@@ -121,14 +143,15 @@ for /r %i in (*.md) do @echo %~pi
 for /r %i in (*.md) do @echo %~ni
 – extention only
 for /r %i in (*.md) do @echo %~xi
--
+- full path of a file
 for /r %i in (*.md) do @echo %~fi
 ```
 
 ### RegExr
 
-- [regexr.com/5mhou](https://regexr.com/5ml92)
+- "[regexr.com/5mhou](..https://regexr.com/5mhou)"
 - type the following expression on the webpage and you will realize what it means
+
 ```
 -- Groups and ranges
 /Hi/gm
@@ -180,4 +203,5 @@ for /r %i in (*.md) do @echo %~fi
 -- If you want only youtube id, please add ?: right next to the parenthesis
 /(?:https?:\/\/)?(?:www\.)?youtu.be\/([a-zA-Z0-9-]{11})/gm
 ```
-- [RegexOne - Interactive Tutorial](https://regexone.com/)
+
+- "[RegexOne - Interactive Tutorial](..https://regexone.com/)"
