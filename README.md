@@ -128,3 +128,56 @@ for /r %i in (*.md) do @echo %~fi
 ### RegExr
 
 - [regexr.com/5mhou](https://regexr.com/5ml92)
+- type the following expression on the webpage and you will realize what it means
+```
+-- Groups and ranges
+/Hi/gm
+/Hi|Hello/gm
+/(Hi|Hello)|(And)/gm
+/gr(e|a|d)y/gm
+/gr(?:e|a)y/gm
+/gr[aed]y/gm
+/gr[abcdef]/gm
+/gr[a-f]/gm
+/[a-zA-Z0-9]/gm
+/[^a-zA-Z0-9]/gm
+
+-- Quantifiers
+/gra?y/gm
+/gra*y/gm
+/gra+y/gm
+/gra{2}y/gm
+/gra{2,3}/gm
+/gra{2,}/gm
+
+-- Boundary-type
+/\bYa/gm
+/Ya\b/gm
+/Ya\B/gm
+/^Ya/gm
+/Ya$/gm
+
+-- Character classes
+/./gm
+/\./gm
+/\[\]/gm
+/\d/gm
+/\D/gm
+/\w/gm
+/\W/gm
+/\s/gm
+/\S/gm
+
+-- mobile phone number
+/\d\d\d-\d\d\d-\d\d\d\d/gm
+/\d{2,3}[- .]\d{3}[- .]\d{4}/gm
+
+-- email
+/[a-zA-Z0-9._+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9.]+/gm
+
+-- youtube url
+/(https?:\/\/)?(www\.)?youtu.be\/([a-zA-Z0-9-]{11})/gm
+-- If you want only youtube id, please add ?: right next to the parenthesis
+/(?:https?:\/\/)?(?:www\.)?youtu.be\/([a-zA-Z0-9-]{11})/gm
+```
+- [RegexOne - Interactive Tutorial](https://regexone.com/)
