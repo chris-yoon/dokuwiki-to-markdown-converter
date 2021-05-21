@@ -104,6 +104,10 @@ It is necessary to change the image path within the md file. For example, the fo
 ![](/images/com/cop/smt/lsm/월별일정.png)
 -->
 ![](../../media/egovframework/com/cop/smt/lsm/월별일정.png)
+
+(/egovframework/dev3.8/mavenrepository3.8.jpg)
+-->
+https://www.egovframe.go.kr/wiki/lib/exe/fetch.php?media=egovframework:dev3.8:mavenrepository3.8.jpg
 ```
 
 ```
@@ -205,3 +209,49 @@ for /r %i in (*.md) do @echo %~fi
 ```
 
 - "[RegexOne - Interactive Tutorial](..https://regexone.com/)"
+
+### Replace
+
+```
+    // [표준관리전체프로세스](/egovframework/adt/표준관리_전체프로세스.jpg) --> [표준관리전체프로세스](../../media/egovframework/adt/표준관리_전체프로세스.jpg)
+    replace({
+      regex: /\[(.*?)\]\((\/egovframework.*?\.(jpg|png|gif))\)/gim,
+      replacement: "[$1](../../media$2)",
+      paths: [item],
+      recursive: true,
+      silent: true,
+    });
+```
+
+```
+    // [표준관리전체프로세스](/images/adt/표준관리_전체프로세스.jpg) --> [표준관리전체프로세스](../../media/egovframework/adt/표준관리_전체프로세스.jpg)
+    replace({
+      regex: /\[(.*?)\]\((?:\/images)(.*?\.(jpg|png|gif))\)/gim,
+      replacement: "[$1](../../media/egovframework$2)",
+      paths: [item],
+      recursive: true,
+      silent: true,
+    });
+```
+
+```
+    // [scheduling](/egovframework/rte/fdl/scheduling) --> [scheduling](../egovframework/rte/fdl/scheduling)
+    replace({
+      regex: /\[(.*?)\]\((.*?[^\.(jpg|png|gif)])\)/gim,
+      replacement: '"[$1](..$2)"',
+      paths: [item],
+      recursive: true,
+      silent: true,
+    });
+```
+
+```
+    // (/egovframework/dev3.8/mavenrepository3.8.jpg) --> (https://www.egovframe.go.kr/wiki/lib/exe/fetch.php?media=egovframework:dev3.8:mavenrepository3.8.jpg)
+    replace({
+      regex: /\((\/egovframework.*?\.(?:jpg|png|gif))\)/gim,
+      replacement: "(../../media$2)",
+      paths: [item],
+      recursive: true,
+      silent: true,
+    });
+```
