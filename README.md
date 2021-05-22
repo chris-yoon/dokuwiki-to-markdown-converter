@@ -247,11 +247,35 @@ for /r %i in (*.md) do @echo %~fi
 
 ```
     // (/egovframework/dev3.8/mavenrepository3.8.jpg) --> (https://www.egovframe.go.kr/wiki/lib/exe/fetch.php?media=egovframework:dev3.8:mavenrepository3.8.jpg)
+    // 1st step : In order to convert / into : , use 'regular expression and condition' like '(?=match this expression)'
     replace({
-      regex: /\((\/egovframework.*?\.(?:jpg|png|gif))\)/gim,
-      replacement: "(../../media$2)",
+      regex: /\/(?=.*\.(jpg|png|gif)\))/gim,
+      replacement: ":",
       paths: [item],
       recursive: true,
       silent: true,
     });
+
+    // 2nd step : Use capturing group $1
+    replace({
+      regex: /\(\:(egovframework.*?\.(?:jpg|png|gif))\)/gim,
+      replacement:
+        "(https://www.egovframe.go.kr/wiki/lib/exe/fetch.php?media=$1)",
+      paths: [item],
+      recursive: true,
+      silent: true,
+    });
+```
+
+```
+    String.prototype.replaceAll = function (org, dest) {
+      return this.replace(org, dest);
+    };
+
+    function replaceWithColon(org) {
+      var dest;
+      dest = org.replace(/\//gi, ":");
+      console.log(dest);
+      return dest;
+    }
 ```
