@@ -1,5 +1,7 @@
 # How to convert dokuwiki to markdown
 
+This project was created to convert the dokuwiki files in https://www.egovframe.go.kr/wiki/doku.php into a markdown files in github.
+
 It will be helpful when there are too many dokuwiki files to convert.
 To convert dokuwiki to markdown I will use a document conversion tool called pandoc.
 And also I will use the following basic sentence structure to automate time-consuming tasks.
