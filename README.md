@@ -155,7 +155,7 @@ for /r %i in (*.md) do @echo %~fi
 
 ### RegExr
 
-- "[regexr.com/5mhou](..https://regexr.com/5mhou)"
+- "[regexr.com/5mhou](https://regexr.com/5mhou)"
 - type the following expression on the webpage and you will realize what it means
 
 ```
@@ -239,8 +239,8 @@ for /r %i in (*.md) do @echo %~fi
 ```
     // [scheduling](/egovframework/rte/fdl/scheduling) --> [scheduling](../egovframework/rte/fdl/scheduling)
     replace({
-      regex: /\[(.*?)\]\((.*?[^\.(jpg|png|gif)])\)/gim,
-      replacement: '"[$1](..$2)"',
+      regex: /\[(.*?)\]\((.*?)(?<!.(jpg|gif|png))\)/gim,
+      replacement: "[$1](..$2.md)",
       paths: [item],
       recursive: true,
       silent: true,
